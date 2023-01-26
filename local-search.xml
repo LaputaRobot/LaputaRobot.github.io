@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>测试文章</title>
+    <link href="/2023/01/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
+    <url>/2023/01/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
+    
+    <content type="html"><![CDATA[<p>测试</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2023/01/26/hello-world/"/>
     <url>/2023/01/26/hello-world/</url>
