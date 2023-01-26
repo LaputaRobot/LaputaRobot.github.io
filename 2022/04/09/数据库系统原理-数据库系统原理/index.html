@@ -16,21 +16,25 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="事务的4大特性ACID 原子性（Atomicity）  事务是不可分割的最小单元，事务的所有操作要么全部提交成功，要么全部失败回滚  一致性（Consistency）  数据库在事务执行前后都保持一致性状态，此时，所有事务对同一数据的读取结果都是相同的。以银行转账事务事务为例。在事务开始之前，所有 账户余额的总额处于一致状态。在事务进行的过程中，一个账户余额减少了，而另一个账户余额尚未修改。因此，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://blog.ygbs.site/2023/01/26/hello-world/index.html">
+<meta property="og:title" content="数据库系统原理">
+<meta property="og:url" content="https://blog.ygbs.site/2022/04/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="Laputa&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="事务的4大特性ACID 原子性（Atomicity）  事务是不可分割的最小单元，事务的所有操作要么全部提交成功，要么全部失败回滚  一致性（Consistency）  数据库在事务执行前后都保持一致性状态，此时，所有事务对同一数据的读取结果都是相同的。以银行转账事务事务为例。在事务开始之前，所有 账户余额的总额处于一致状态。在事务进行的过程中，一个账户余额减少了，而另一个账户余额尚未修改。因此，">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-26T07:16:50.894Z">
-<meta property="article:modified_time" content="2023-01-26T07:16:50.894Z">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220405221221827.png">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220405224215307.png">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220406092640069.png">
+<meta property="article:published_time" content="2022-04-09T03:17:07.205Z">
+<meta property="article:modified_time" content="2022-04-09T03:17:24.409Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220405221221827.png">
   
   
   
-  <title>Hello World - Laputa&#39;s Blog</title>
+  <title>数据库系统原理 - Laputa&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="数据库系统原理"></span>
           
         </div>
 
@@ -207,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-26 15:16" pubdate>
-          2023年1月26日 下午
+        <time datetime="2022-04-09 11:17" pubdate>
+          2022年4月9日 上午
         </time>
       </span>
     
@@ -219,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          367 字
+          1.3k 字
         
       </span>
     
@@ -230,7 +234,7 @@
         
         
         
-          4 分钟
+          11 分钟
         
       </span>
     
@@ -268,24 +272,75 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hello World</h1>
+            <h1 style="display: none">数据库系统原理</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <h1 id="事务的4大特性ACID"><a href="#事务的4大特性ACID" class="headerlink" title="事务的4大特性ACID"></a>事务的4大特性ACID</h1><ol>
+<li>原子性（Atomicity）</li>
+</ol>
+<p>事务是不可分割的最小单元，事务的所有操作要么全部提交成功，要么全部失败回滚</p>
+<ol start="2">
+<li>一致性（Consistency）</li>
+</ol>
+<p>数据库在事务执行前后都保持一致性状态，此时，所有事务对同一数据的读取结果都是相同的。以银行转账事务事务为例。在事务开始之前，所有 账户余额的总额处于一致状态。在事务进行的过程中，一个账户余额减少了，而另一个账户余额尚未修改。因此，所有账户余额的总额处于不一致状态。但是当事务完成以后，账户余额的总额再次恢复到一致状态。</p>
+<ol start="3">
+<li>隔离性（Isolation）</li>
+</ol>
+<p>一个事务所做的修改在最终提交前，对其他事务是不可见的</p>
+<ol start="4">
+<li>持久性（Durability）</li>
+</ol>
+<p>一旦事务提交，则其所做的修改将会永远保存到数据库中。即使系统发生崩溃。</p>
+<h2 id="特性间关系"><a href="#特性间关系" class="headerlink" title="特性间关系"></a>特性间关系</h2><ul>
+<li>只有满足一致性，事务的执行结果才是正确的。</li>
+<li>在无并发的情况下，事务串行执行，隔离性一定能够满足。此时只要能满足原子性，就一定能满足一致性。</li>
+<li>在并发的情况下，多个事务并行执行，事务不仅要满足原子性，还需要满足隔离性，才能满足一致性。</li>
+<li>事务满足持久化是为了能应对系统崩溃的情况</li>
+</ul>
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220405221221827.png" srcset="/img/loading.gif" lazyload alt="image-20220405221221827"></p>
+<h1 id="并发一致性问题"><a href="#并发一致性问题" class="headerlink" title="并发一致性问题"></a>并发一致性问题</h1><p>并发环境下由于隔离性破坏导致的一致性问题：</p>
+<ul>
+<li>丢失修改，一个事务的操作被另一个事务的操作替换</li>
+<li>脏读，一个事务读取到了另一个事务还未提交的数据</li>
+<li>不可重复读，由于其他事务的修改，导致在当前事务内对同一数据的读取结果不同</li>
+<li>幻读，由于其他事务的添加或者删除，导致在当前事务内对同一数据库的读取结果不同，会多一行或者少一行</li>
+</ul>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><h2 id="封锁粒度"><a href="#封锁粒度" class="headerlink" title="封锁粒度"></a>封锁粒度</h2><ul>
+<li>行级锁</li>
+<li>表级锁</li>
+</ul>
+<h2 id="封锁类型"><a href="#封锁类型" class="headerlink" title="封锁类型"></a>封锁类型</h2><h3 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h3><ol>
+<li>互斥锁，简写为X锁，又称写锁</li>
+<li>共享锁，简写为S锁，又称读锁</li>
+</ol>
+<p>原则：</p>
+<ol>
+<li>一个事务对一个数据对象加了X锁，则其他事务不能对该对象加任何锁</li>
+<li>一个事务对一个数据对象加了S锁，则其他事务不能对该对象加X锁，但可加S锁</li>
+</ol>
+<h3 id="意向锁"><a href="#意向锁" class="headerlink" title="意向锁"></a>意向锁</h3><p>背景：当事务想对表加X锁时，需要检测是否表内的某行已经加了锁，因此引入表级的意向锁。事务 T 想要对表 A 加 X 锁，只需要先检测是否有其它事务对表 A 加了 X&#x2F;IX&#x2F;S&#x2F;IS 锁。</p>
+<p>兼容类型（表级）：</p>
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220405224215307.png" srcset="/img/loading.gif" lazyload alt="image-20220405224215307"></p>
+<p>这里兼容关系针对的是表级锁，而表级的 IX 锁和行级的 X 锁兼容，两个事务可以对两个数据行加 X 锁。</p>
+<h2 id="封锁协议"><a href="#封锁协议" class="headerlink" title="封锁协议"></a>封锁协议</h2><h3 id="三级封锁协议"><a href="#三级封锁协议" class="headerlink" title="三级封锁协议"></a>三级封锁协议</h3><ol>
+<li>一级。事务 T 要修改数据 A 时必须<strong>加 X 锁</strong>，直到 <strong>T 结束才释放锁</strong>。解决丢失修改问题。</li>
+<li>二级。在一级的基础上，要求读取数据 A 时必须<strong>加 S 锁</strong>，<strong>读取完马上释放 S 锁</strong>。解决脏读问题，要读取时如果有X锁则不能读。</li>
+<li>三级。在二级的基础上，要求读取数据 A 时必须<strong>加 S 锁</strong>，直到<strong>事务结束了才能释放 S 锁</strong>。解决不可重复读问题，因为事务结束前其他事务无法加X锁。</li>
+</ol>
+<h3 id="两段锁协议"><a href="#两段锁协议" class="headerlink" title="两段锁协议"></a>两段锁协议</h3><p>定义：加锁和解锁分为两个阶段进行。</p>
+<p>事务遵循两段锁协议是保证可串行化调度的充分条件，但不是必要条件。</p>
+<blockquote>
+<p>MySQL 的 InnoDB 存储引擎采用两段锁协议，会根据隔离级别在需要的时候自动加锁，并且所有的锁都是在同一时刻被释放，这被称为隐式锁定。</p>
+</blockquote>
+<h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><ul>
+<li>未提交读，事务没有提交，其他事务是可见的</li>
+<li>提交读，事务提交前，对其他事务是不可见的</li>
+<li>可重复读，同一事务中读取同一数据的结果是一样的</li>
+<li>可串行化，事务是串行执行的</li>
+</ul>
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220406092640069.png" srcset="/img/loading.gif" lazyload alt="image-20220406092640069"></p>
 
                 
               </div>
@@ -293,6 +348,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -303,8 +379,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>https://blog.ygbs.site/2023/01/26/hello-world/</div>
+      <div>数据库系统原理</div>
+      <div>https://blog.ygbs.site/2022/04/09/数据库系统原理-数据库系统原理/</div>
     </div>
     <div class="license-meta">
       
@@ -316,7 +392,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月26日</div>
+          <div>2022年4月9日</div>
         </div>
       
       
@@ -348,9 +424,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章">
+                      <a href="/2022/05/01/ArrayList%E5%92%8CLinkedList-arraylist%E5%92%8Clinkedlistmd/" title="ArrayList和LinkedList">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">测试文章</span>
+                        <span class="hidden-mobile">ArrayList和LinkedList</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -358,8 +434,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/25/%E9%94%81-%E9%94%81md/" title="锁">
-                        <span class="hidden-mobile">锁</span>
+                      <a href="/2022/04/08/Redis%E4%BA%8B%E5%8A%A1-redis%E4%BA%8B%E5%8A%A1/" title="Redis事务">
+                        <span class="hidden-mobile">Redis事务</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

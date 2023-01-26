@@ -1,0 +1,849 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="事务的隔离性由锁实现 锁结构当一个事务想对这条记录做改动时，首先会看看内存中有没有与这条记录关联的锁结构，当没有的时候就会在内存中生成一个锁结构与之关联。  锁内存结构InnoDB 存储引擎中的 锁结构 如下：   锁所在的事务信息 ：  不论是 表锁 还是 行锁 ，都是在事务执行过程中生成的，哪个事务生成了这个 锁结构 ，这里就记录这个 事务的信息。  此 锁所在的事务信息 在内存结构中只是一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="锁">
+<meta property="og:url" content="https://blog.ygbs.site/2022/09/25/%E9%94%81-%E9%94%81md/index.html">
+<meta property="og:site_name" content="Laputa&#39;s Blog">
+<meta property="og:description" content="事务的隔离性由锁实现 锁结构当一个事务想对这条记录做改动时，首先会看看内存中有没有与这条记录关联的锁结构，当没有的时候就会在内存中生成一个锁结构与之关联。  锁内存结构InnoDB 存储引擎中的 锁结构 如下：   锁所在的事务信息 ：  不论是 表锁 还是 行锁 ，都是在事务执行过程中生成的，哪个事务生成了这个 锁结构 ，这里就记录这个 事务的信息。  此 锁所在的事务信息 在内存结构中只是一个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925113522813.png">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925182029213.png">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925182558233.png">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925113832805.png">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925114933942.png">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925180137364.png">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925194657695.png">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925201840219.png">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925201633279.png">
+<meta property="article:published_time" content="2022-09-25T12:46:49.152Z">
+<meta property="article:modified_time" content="2022-09-25T12:48:19.330Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925113522813.png">
+  
+  
+  
+  <title>锁 - Laputa&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.ygbs.site","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="锁"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-25 20:46" pubdate>
+          2022年9月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          10k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          86 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">锁</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>事务的<code>隔离性</code>由<code>锁</code>实现</p>
+<h1 id="锁结构"><a href="#锁结构" class="headerlink" title="锁结构"></a>锁结构</h1><p>当一个事务想对这条记录做改动时，首先会看看内存中有没有与这条记录关联的锁结构，当没有的时候就会在内存中生成一个锁结构与之关联。</p>
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925113522813.png" srcset="/img/loading.gif" lazyload alt="锁结构"></p>
+<h2 id="锁内存结构"><a href="#锁内存结构" class="headerlink" title="锁内存结构"></a>锁内存结构</h2><p>InnoDB 存储引擎中的 锁结构 如下：</p>
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925182029213.png" srcset="/img/loading.gif" lazyload alt="锁内存结构"></p>
+<ol>
+<li><p>锁所在的事务信息 ： </p>
+<p>不论是 表锁 还是 行锁 ，都是在事务执行过程中生成的，哪个事务生成了这个 锁结构 ，这里就记录这个 事务的信息。 </p>
+<p>此 锁所在的事务信息 在内存结构中只是一个指针，通过指针可以找到内存中关于该事务的更多信息，比 方说事务id等。</p>
+</li>
+<li><p>索引信息 ：</p>
+</li>
+</ol>
+<p>   对于 行锁 来说，需要记录一下加锁的记录是属于哪个索引的。这里也是一个指针。 </p>
+<ol start="3">
+<li>表锁／行锁信息 ： 表锁结构 和 行锁结构 在这个位置的内容是不同的：</li>
+</ol>
+<ul>
+<li><p>表锁</p>
+<p>记载着是对哪个表加的锁，还有其他的一些信息。</p>
+</li>
+<li><p>行锁</p>
+<p>记载了三个重要的信息： </p>
+<p>Space ID ：记录所在表空间。 </p>
+<p>Page Number ：记录所在页号。 </p>
+<p>n_bits ：对于行锁来说，一条记录就对应着一个比特位，一个页面中包含很多记录，用不同 的比特位来区分到底是哪一条记录加了锁。为此在行锁结构的末尾放置了一堆比特位，这个 n_bits 属性代表使用了多少比特位。</p>
+</li>
+</ul>
+<ol start="4">
+<li><p>这是一个32位的数，被分成了 lock_mode 、 lock_type 和 rec_lock_type 三个部分，如图所示：</p>
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925182558233.png" srcset="/img/loading.gif" lazyload alt="type-mode各位置含义"></p>
+<ul>
+<li><p>锁的模式（ lock_mode ），占用低4位，可选的值如下：</p>
+<ul>
+<li>LOCK_IS （十进制的 0 ）：表示共享意向锁，也就是 IS锁 。 </li>
+<li>LOCK_IX （十进制的 1 ）：表示独占意向锁，也就是 IX锁 。</li>
+<li>LOCK_S （十进制的 2 ）：表示共享锁，也就是 S锁 。 </li>
+<li>LOCK_X （十进制的 3 ）：表示独占锁，也就是 X锁 。 </li>
+<li>LOCK_AUTO_INC （十进制的 4 ）：表示 AUTO-INC锁 。</li>
+</ul>
+<p>在InnoDB存储引擎中，LOCK_IS，LOCK_IX，LOCK_AUTO_INC都算是表级锁的模式，LOCK_S和 LOCK_X既可以算是表级锁的模式，也可以是行级锁的模式。 </p>
+</li>
+<li><p>锁的类型（ lock_type ），占用第5～8位，不过现阶段只有第5位和第6位被使用：</p>
+<ul>
+<li>LOCK_TABLE （十进制的 16 ），也就是当第5个比特位置为1时，表示表级锁。 </li>
+<li>LOCK_REC （十进制的 32 ），也就是当第6个比特位置为1时，表示行级锁。</li>
+</ul>
+</li>
+<li><p>行锁的具体类型（ rec_lock_type ），使用其余的位来表示。只有在 lock_type 的值为 LOCK_REC 时，也就是只有在该锁为行级锁时，才会被细分为更多的类型： </p>
+<ul>
+<li>LOCK_ORDINARY （十进制的 0 ）：表示 next-key锁 。</li>
+<li>LOCK_GAP （十进制的 512 ）：也就是当第10个比特位置为1时，表示 gap锁 。</li>
+<li>LOCK_REC_NOT_GAP （十进制的 1024 ）：也就是当第11个比特位置为1时，表示正经 记录 锁 。 </li>
+<li>LOCK_INSERT_INTENTION （十进制的 2048 ）：也就是当第12个比特位置为1时，表示插入 意向锁。其他的类型：还有一些不常用的类型我们就不多说了。</li>
+</ul>
+</li>
+<li><p>is_waiting 属性呢？基于内存空间的节省，所以把 is_waiting 属性放到了 type_mode 这个32 位的数字中： </p>
+</li>
+<li><p>LOCK_WAIT （十进制的 256 ） ：当第9个比特位置为 1 时，表示 is_waiting 为 true ，也 就是当前事务尚未获取到锁，处在等待状态；当这个比特位为 0 时，表示 is_waiting 为 false ，也就是当前事务获取锁成功。</p>
+</li>
+</ul>
+</li>
+<li><p>其他信息</p>
+<p>为了更好的管理系统运行过程中生成的各种锁结构而设计了各种哈希表和链表。</p>
+</li>
+<li><p>一堆比特位 </p>
+<p>如果是 行锁结构 的话，在该结构末尾还放置了一堆比特位，比特位的数量是由上边提到的 n_bits 属性 表示的。InnoDB数据页中的每条记录在 记录头信息 中都包含一个 heap_no 属性，伪记录 Infimum 的 heap_no 值为 0 ， Supremum 的 heap_no 值为 1 ，之后每插入一条记录， heap_no 值就增1。 锁结 构 最后的一堆比特位就对应着一个页面中的记录，一个比特位映射一个 heap_no ，即<strong>一个比特位映射 到页内的一条记录</strong>。</p>
+</li>
+</ol>
+<h1 id="锁分类"><a href="#锁分类" class="headerlink" title="锁分类"></a>锁分类</h1><p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925113832805.png" srcset="/img/loading.gif" lazyload alt="锁分类"></p>
+<h2 id="从操作类型划分：读锁、写锁"><a href="#从操作类型划分：读锁、写锁" class="headerlink" title="从操作类型划分：读锁、写锁"></a>从操作类型划分：读锁、写锁</h2><ul>
+<li><p>读锁、共享锁、S锁：针对同一份数据，多个事务的读操作可以同时进行而不会互相影响，相互不阻塞的。</p>
+</li>
+<li><p>写锁、排他锁、X锁：当前写操作没有完成前，它会阻断其他写锁和读锁。</p>
+</li>
+</ul>
+<h2 id="从粒度划分：表级锁、页级锁、行锁"><a href="#从粒度划分：表级锁、页级锁、行锁" class="headerlink" title="从粒度划分：表级锁、页级锁、行锁"></a>从粒度划分：表级锁、页级锁、行锁</h2><h3 id="1、表锁"><a href="#1、表锁" class="headerlink" title="1、表锁"></a>1、表锁</h3><h4 id="1-1、表级别X锁、S锁"><a href="#1-1、表级别X锁、S锁" class="headerlink" title="1.1、表级别X锁、S锁"></a>1.1、表级别X锁、S锁</h4><p>在对某个表执行&#96;SELECT、INSERT、DELETE、UPDATE语句时，InnoDB存储引擎是不会为这个表添加表级别的S锁或者X锁的。</p>
+<p>在对某个表执行一些诸如ALTERT ABLE、DROP TABLE这类的DDL语句时，其他事务对这个表并发执行诸如SELECT、INSERT、DELETE、UPDATE的语句会发生阻塞。同理，某个事务中对某个表执行SELECT、INSERT、DELETE、UPDATE语句时，在其他会话中对这个表执行DDL语句也会发生阻塞。这个过程其实是通过在server层使用一种称之为元数据锁（英文名：Metadata Locks，简称MDL）结构来实现的。</p>
+<p>一般情况下，不会使用InnoDB存储引擎提供的表级别的S锁和X锁。只会在一些特殊情况下，比方说崩溃恢复过程中用到。比如，在系统变量autocommit&#x3D;0，innodb_table_locks&#x3D;1时，手动获取InnoDB存储引擎提供的表t的S锁或者X锁可以这么写：</p>
+<p>LOCK TABLES t READ：InnoDB存储引擎会对表t加表级别的S锁。</p>
+<p>LOCK TABLES t WRITE：InnoDB存储引擎会对表t加表级别的X锁。</p>
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925114933942.png" srcset="/img/loading.gif" lazyload alt="表锁互斥规则"></p>
+<h4 id="1-2、意向锁（intention-lock）"><a href="#1-2、意向锁（intention-lock）" class="headerlink" title="1.2、意向锁（intention lock）"></a>1.2、意向锁（intention lock）</h4><ul>
+<li>意向共享锁（intention shared lock, IS）：事务有意向对表中的某些行加共享锁（S锁）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 事务要获取某些行的 S 锁，必须先获得表的 IS 锁。<br>SELECT column FROM table ... LOCK IN SHARE MODE;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>意向排他锁（intention exclusive lock, IX）：事务有意向对表中的某些行加排他锁（X锁）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 事务要获取某些行的 X 锁，必须先获得表的 IX 锁。<br>SELECT column FROM table ... FOR UPDATE;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>意向锁是由存储引擎自己维护的 ，用户无法手动操作意向锁，在为数据行加共享 &#x2F; 排他锁之前， InooDB 会先获取该数据行所在数据表的对应意向锁 。</p>
+</blockquote>
+<p>意向锁不会与行级的共享 &#x2F; 排他锁互斥！正因为如此，意向锁并不会影响到多个事务对不同数据行加排他锁时的并发性。（不然我们直接用普通的表锁就行了）</p>
+<p><strong>结论：</strong></p>
+<ol>
+<li>InnoDB 支持 多粒度锁 ，特定场景下，行级锁可以与表级锁共存。 </li>
+<li>意向锁之间互不排斥，但除了 IS 与 S 兼容外， 意向锁会与 共享锁 &#x2F; 排他锁 互斥 。</li>
+<li>IX，IS是表级锁，不会和行级的X，S锁发生冲突。只会和表级的X，S发生冲突。</li>
+<li>意向锁在保证并发性的前提下，实现了行锁和表锁共存且满足事务隔离性的要求。</li>
+</ol>
+<h4 id="1-3-、自增锁（AUTO-INC锁）"><a href="#1-3-、自增锁（AUTO-INC锁）" class="headerlink" title="1.3 、自增锁（AUTO-INC锁）"></a>1.3 、自增锁（AUTO-INC锁）</h4><p>所有插入数据的方式总共分为三类，分别是“Simple inserts”，“ Bulk inserts ”和“ Mixed-mode inserts ”。</p>
+<ol>
+<li><p>“Simple inserts” （简单插入） </p>
+<p>可以预先确定要插入的行数（当语句被初始处理时）的语句。包括没有嵌套子查询的单行和多行INSERT…VALUES()和REPLACE语句。</p>
+</li>
+<li><p>“Bulk inserts”（批量插入）</p>
+<p>事先不知道要插入的行数（和所需自动递增值的数量）的语句。比如 INSERT … SELECT ， REPLACE … SELECT 和 LOAD DATA 语句，但不包括纯INSERT。 InnoDB在每处理一行，为AUTO_INCREMENT列 分配一个新值。 </p>
+</li>
+<li><p>“Mixed-mode inserts” （混合模式插入）</p>
+</li>
+</ol>
+<p>   这些是“Simple inserts”语句但是指定部分新行的自动递增值。例如 INSERT INTO teacher (id,name) VALUES (1,’a’), (NULL,’b’), (5,’c’), (NULL,’d’); 只是指定了部分id的值。另一种类型的“混合模式插入”是 INSERT … ON DUPLICATE KEY UPDATE 。</p>
+<p>innodb_autoinc_lock_mode有三种取值，分别对应与不同锁定模式：</p>
+<p>（1）innodb_autoinc_lock_mode &#x3D; 0(“传统”锁定模式)</p>
+<p>在此锁定模式下，所有类型的insert语句都会获得一个特殊的表级AUTO-INC锁，用于插入具有 AUTO_INCREMENT列的表。在binlog中重放的时候，可以保证 master与slave中数据的auto_increment是相同的。因为是表级锁，当在同一时间多个事务中执行insert的 时候，对于AUTO-INC锁的争夺会限制并发 能力。</p>
+<p>（2）innodb_autoinc_lock_mode &#x3D; 1(“连续”锁定模式)(8.0之前默认)</p>
+<p>在这个模式下，“bulk inserts”仍然使用AUTO-INC表级锁，并保持到语句结束。</p>
+<p>对于“Simple inserts”（要插入的行数事先已知），则通过在 mutex（轻量锁） 的控制下获得所需数量的 自动递增值来避免表级AUTO-INC锁， 它只在分配过程的持续时间内保持，而不是直到语句完成。不使用 表级AUTO-INC锁，除非AUTO-INC锁由另一个事务保持。如果另一个事务保持AUTO-INC锁，则“Simple inserts”等待AUTO-INC锁，如同它是一个“bulk inserts”。</p>
+<p>（3）innodb_autoinc_lock_mode &#x3D; 2(“交错”锁定模式)（8.0开始默认） </p>
+<p>在此锁定模式下，自动递增值保证在所有并发执行的所有类型的insert语句中是唯一且单调递增的。但是，由于多个语句可以同时生成数字（即，跨语句交叉编号），为任何给定语句插入的行生成的值可能不是连续的。</p>
+<h4 id="1-4、元数据锁（MDL锁）"><a href="#1-4、元数据锁（MDL锁）" class="headerlink" title="1.4、元数据锁（MDL锁）"></a>1.4、元数据锁（MDL锁）</h4><p> MySQL5.5引入了meta data lock，简称MDL锁，属于表锁范畴。MDL的作用是，保证读写的正确性。比如，如果一个查询正在遍历一个表中的数据，而执行期间另一个线程对这个表结构做变更，增加了一列，那么查询线程拿到的结果跟表结构对不上，肯定是不行的。因此，当对一个表做增删改查操作的时候，加MDL读锁；当要对表做结构变更操作的时候，加MDL写锁。</p>
+<h3 id="2-InnoDB中的行锁"><a href="#2-InnoDB中的行锁" class="headerlink" title="2. InnoDB中的行锁"></a>2. InnoDB中的行锁</h3><h4 id="1-1、记录锁（Record-Locks）"><a href="#1-1、记录锁（Record-Locks）" class="headerlink" title="1.1、记录锁（Record Locks）"></a>1.1、记录锁（Record Locks）</h4><p>记录锁也就是仅仅把一条记录锁上，官方的类型名称为： <code>LOCK_REC_NOT_GAP</code> 。比如我们把id值为8的 那条记录加一个记录锁的示意图如图所示。仅仅是锁住了id值为8的记录，对周围的数据没有影响。</p>
+<h4 id="1-2、间隙锁（Gap-Lock）"><a href="#1-2、间隙锁（Gap-Lock）" class="headerlink" title="1.2、间隙锁（Gap Lock）"></a>1.2、间隙锁（Gap Lock）</h4><p>MySQL在 REPEATABLE READ 隔离级别下是可以解决幻读问题的，解决方案有两种，可以使用 MVCC 方案解决，也可以采用 加锁 方案解决。但是在使用加锁方案解决时有个大问题，就是事务在第一次执行读 取操作时，那些幻影记录尚不存在，我们无法给这些 幻影记录 加上 记录锁 。InnoDB提出了一种称之为 Gap Locks 的锁，官方的类型名称为：<code>LOCK_GAP</code> ，我们可以简称为 gap锁 。比如，把id值为8的那条 记录加一个gap锁的示意图如下。</p>
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925180137364.png" srcset="/img/loading.gif" lazyload alt="image-20220925180137364"></p>
+<h4 id="1-3、-临键锁（Next-Key-Locks）"><a href="#1-3、-临键锁（Next-Key-Locks）" class="headerlink" title="1.3、 临键锁（Next-Key Locks）"></a>1.3、 临键锁（Next-Key Locks）</h4><p>有时候我们既想锁住某条记录 ，又想阻止其他事务在该记录前边的间隙插入新记录 ，所以InnoDB就提 出了一种称之为 Next-Key Locks 的锁，官方的类型名称为： <code>LOCK_ORDINARY</code> ，我们也可以简称为 next-key锁 。Next-Key Locks是在存储引擎 innodb 、事务级别在 可重复读 的情况下使用的数据库锁， <strong>innodb默认的锁就是Next-Key locks</strong>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">begin</span>;<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> student <span class="hljs-keyword">where</span> id <span class="hljs-operator">&lt;=</span><span class="hljs-number">8</span> <span class="hljs-keyword">and</span> id <span class="hljs-operator">&gt;</span> <span class="hljs-number">3</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">update</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-4、插入意向锁（Insert-Intention-Locks）"><a href="#1-4、插入意向锁（Insert-Intention-Locks）" class="headerlink" title="1.4、插入意向锁（Insert Intention Locks）"></a>1.4、插入意向锁（Insert Intention Locks）</h4><p>我们说一个事务在 插入 一条记录时需要判断一下插入位置是不是被别的事务加了 gap锁 （ next-key锁 也包含 gap锁 ），如果有的话，插入操作需要等待，直到拥有 gap锁 的那个事务提交。但是InnoDB规 定事务在等待的时候也需要在内存中生成一个锁结构，表明有事务想在某个 间隙 中 插入 新记录，但是 现在在等待。InnoDB就把这种类型的锁命名为 Insert Intention Locks ，官方的类型名称为： <code>LOCK_INSERT_INTENTION</code>，我们称为 插入意向锁 。插入意向锁是一种 Gap锁 ，不是意向锁，在insert 操作时产生。</p>
+<p>插入意向锁是在插入一条记录行前，由 INSERT 操作产生的一种间隙锁 。</p>
+<p>事实上<strong>插入意向锁并不会阻止别的事务继续获取该记录上任何类型的锁</strong>。</p>
+<h3 id="3、页锁"><a href="#3、页锁" class="headerlink" title="3、页锁"></a>3、页锁</h3><h3 id="4、全局锁"><a href="#4、全局锁" class="headerlink" title="4、全局锁"></a>4、全局锁</h3><p>全局锁就是对 整个数据库实例 加锁。当你需要让整个库处于 只读状态 的时候，可以使用这个命令，之后 其他线程的以下语句会被阻塞：数据更新语句（数据的增删改）、数据定义语句（包括建表、修改表结 构等）和更新类事务的提交语句。全局锁的典型使用 场景 是：做 全库逻辑备份 。 全局锁的命令：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">Flush <span class="hljs-keyword">tables</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">read</span> <span class="hljs-keyword">lock</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="从对待锁的态度划分-乐观锁、悲观锁"><a href="#从对待锁的态度划分-乐观锁、悲观锁" class="headerlink" title="从对待锁的态度划分:乐观锁、悲观锁"></a>从对待锁的态度划分:乐观锁、悲观锁</h2><h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><h2 id="按加锁的方式划分：显式锁、隐式锁"><a href="#按加锁的方式划分：显式锁、隐式锁" class="headerlink" title="按加锁的方式划分：显式锁、隐式锁"></a>按加锁的方式划分：显式锁、隐式锁</h2><h3 id="1、隐式锁"><a href="#1、隐式锁" class="headerlink" title="1、隐式锁"></a>1、隐式锁</h3><ul>
+<li><strong>情景一：</strong>对于聚簇索引记录来说，有一个 trx_id 隐藏列，该隐藏列记录着最后改动该记录的 事务 id 。那么如果在当前事务中新插入一条聚簇索引记录后，该记录的 trx_id 隐藏列代表的的就是 当前事务的 事务id ，如果其他事务此时想对该记录添加 S锁 或者 X锁 时，首先会看一下该记录的 trx_id 隐藏列代表的事务是否是当前的活跃事务，如果是的话，那么就帮助当前事务创建一个 X 锁 （也就是为当前事务创建一个锁结构， is_waiting 属性是 false ），然后自己进入等待状态 （也就是为自己也创建一个锁结构， is_waiting 属性是 true ）。</li>
+<li><strong>情景二</strong>：对于二级索引记录来说，本身并没有 trx_id 隐藏列，但是在二级索引页面的 Page Header 部分有一个 PAGE_MAX_TRX_ID 属性，该属性代表对该页面做改动的最大的 事务id ，如 果 PAGE_MAX_TRX_ID 属性值小于当前最小的活跃 事务id ，那么说明对该页面做修改的事务都已 经提交了，否则就需要在页面中定位到对应的二级索引记录，然后回表找到它对应的聚簇索引记 录，然后再重复 情景一 的做法。</li>
+</ul>
+<p>隐式锁的逻辑过程如下： </p>
+<p>A. InnoDB的每条记录中都一个隐含的trx_id字段，这个字段存在于聚簇索引的B+Tree中。</p>
+<p>B. 在操作一条记录前，首先根据记录中的trx_id检查该事务是否是活动的事务(未提交或回滚)。如果是活 动的事务，首先将 隐式锁 转换为 显式锁 (就是为该事务添加一个锁)。 </p>
+<p>C. 检查是否有锁冲突，如果有冲突，创建锁，并设置为waiting状态。如果没有冲突不加锁，跳到E。 </p>
+<p>D. 等待加锁成功，被唤醒，或者超时。 </p>
+<p>E. 写数据，并将自己的trx_id写入trx_id字段。</p>
+<h3 id="2、显式锁"><a href="#2、显式锁" class="headerlink" title="2、显式锁"></a>2、显式锁</h3><p>通过特定的语句进行加锁，我们一般称之为显示加锁，例如： 显示加共享锁：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">select</span> .... <span class="hljs-keyword">lock</span> <span class="hljs-keyword">in</span> share mode<br></code></pre></td></tr></table></figure>
+
+<p>显示加排它锁：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-function"><span class="hljs-title">select</span></span> .... <span class="hljs-keyword">for</span> update<br></code></pre></td></tr></table></figure>
+
+<h1 id="锁监控"><a href="#锁监控" class="headerlink" title="锁监控"></a>锁监控</h1><p>关于MySQL锁的监控，我们一般可以通过检查InnoDB_row_lock 等状态变量来分析系统上的行锁的争夺情况</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">show</span> status <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;innodb_row_lock%&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925194657695.png" srcset="/img/loading.gif" lazyload alt="image-20220925194657695"></p>
+<p>对各个状态量的说明如下：</p>
+<ul>
+<li>Innodb_row_lock_current_waits：当前正在等待锁定的数量； </li>
+<li>Innodb_row_lock_time ：从系统启动到现在锁定总时间长度；（等待总时长） </li>
+<li>Innodb_row_lock_time_avg ：每次等待所花平均时间；（等待平均时长） </li>
+<li>Innodb_row_lock_time_max：从系统启动到现在等待最常的一次所花的时间； </li>
+<li>Innodb_row_lock_waits ：系统启动后到现在总共等待的次数；（等待总次数）</li>
+</ul>
+<h2 id="其他监控方法"><a href="#其他监控方法" class="headerlink" title="其他监控方法"></a>其他监控方法</h2><p>MySQL把事务和锁的信息记录在了 information_schema 库中，涉及到的三张表分别是 INNODB_TRX 、 INNODB_LOCKS 和 INNODB_LOCK_WAITS 。 </p>
+<p>MySQL5.7及之前 ，可以通过information_schema.INNODB_LOCKS查看事务的锁情况，但只能看到阻塞事务的锁；如果事务并未被阻塞，则在该表中看不到该事务的锁情况。 </p>
+<p>MySQL8.0删除了information_schema.INNODB_LOCKS，添加了 performance_schema.data_locks ，可 以通过performance_schema.data_locks查看事务的锁情况，和MySQL5.7及之前不同， performance_schema.data_locks不但可以看到阻塞该事务的锁，还可以看到该事务所持有的锁。</p>
+<p>同时，information_schema.INNODB_LOCK_WAITS也被 performance_schema.data_lock_waits 所代替。</p>
+<pre><code class=" mermaid">graph LR
+	E(MySQL5.7)--&gt;F(MySQL8.0)
+	A(information_schema.INNODB_LOCKS)--&gt;B(performance_schema.data_locks)
+	C(information_schema.INNODB_LOCK_WAITS)--&gt;D(performance_schema.data_lock_waits)
+</code></pre>
+
+<p>（1）查询正在被锁阻塞的sql语句。</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> information_schema.INNODB_TRX\G;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs bash">trx_id：唯一事务<span class="hljs-built_in">id</span>号，只读事务和非锁事务是不会创建<span class="hljs-built_in">id</span>的。<br>TRX_WEIGHT：事务的高度，代表修改的行数（不一定准确）和被事务锁住的行数。为了解决死锁，innodb会选择一个高度最小的事务来当做牺牲品进行回滚。已经被更改的非交易型表的事务权重比其他事务高，即使改变的行和锁住的行比其他事务低。<br>TRX_STATE：事务的执行状态，值一般分为：RUNNING, LOCK WAIT, ROLLING BACK, and COMMITTING.<br>TRX_STARTED：事务的开始时间<br>TRX_REQUESTED_LOCK_ID:如果trx_state是lockwait,显示事务当前等待锁的<span class="hljs-built_in">id</span>，不是则为空。想要获取锁的信息，根据该lock_id，以innodb_locks表中lock_id列匹配条件进行查询，获取相关信息。<br>TRX_WAIT_STARTED：如果trx_state是lockwait,该值代表事务开始等待锁的时间；否则为空。<br>TRX_MYSQL_THREAD_ID：mysql线程<span class="hljs-built_in">id</span>。想要获取该线程的信息，根据该thread_id，以INFORMATION_SCHEMA.PROCESSLIST表的<span class="hljs-built_in">id</span>列为匹配条件进行查询。<br>TRX_QUERY：事务正在执行的sql语句。<br>TRX_OPERATION_STATE：事务当前的操作状态，没有则为空。<br>TRX_TABLES_IN_USE：事务在处理当前sql语句使用innodb引擎表的数量。<br>TRX_TABLES_LOCKED：当前sql语句有行锁的innodb表的数量。（因为只是行锁，不是表锁，表仍然可以被多个事务读和写）<br>TRX_LOCK_STRUCTS：事务保留锁的数量。<br>TRX_LOCK_MEMORY_BYTES：在内存中事务索结构占得空间大小。<br>TRX_ROWS_LOCKED：事务行锁最准确的数量。这个值可能包括对于事务在物理上存在，实际不可见的删除标记的行。<br>TRX_ROWS_MODIFIED：事务修改和插入的行数<br>TRX_CONCURRENCY_TICKETS：该值代表当前事务在被清掉之前可以多少工作，由 innodb_concurrency_tickets系统变量值指定。<br>TRX_ISOLATION_LEVEL：事务隔离等级。<br>TRX_UNIQUE_CHECKS：当前事务唯一性检查启用还是禁用。当批量数据导入时，这个参数是关闭的。<br>TRX_FOREIGN_KEY_CHECKS：当前事务的外键坚持是启用还是禁用。当批量数据导入时，这个参数是关闭的。<br>TRX_LAST_FOREIGN_KEY_ERROR：最新一个外键错误信息，没有则为空。<br>TRX_ADAPTIVE_HASH_LATCHED：自适应哈希索引是否被当前事务阻塞。当自适应哈希索引查找系统分区，一个单独的事务不会阻塞全部的自适应<span class="hljs-built_in">hash</span>索引。自适应<span class="hljs-built_in">hash</span>索引分区通过 innodb_adaptive_hash_index_parts参数控制，默认值为8。<br>TRX_ADAPTIVE_HASH_TIMEOUT：是否为了自适应<span class="hljs-built_in">hash</span>索引立即放弃查询锁，或者通过调用mysql函数保留它。当没有自适应<span class="hljs-built_in">hash</span>索引冲突，该值为0并且语句保持锁直到结束。在冲突过程中，该值被计数为0，每句查询完之后立即释放门闩。当自适应<span class="hljs-built_in">hash</span>索引查询系统被分区（由 innodb_adaptive_hash_index_parts参数控制），值保持为0。<br>TRX_IS_READ_ONLY：值为1表示事务是<span class="hljs-built_in">read</span> only。<br>TRX_AUTOCOMMIT_NON_LOCKING：值为1表示事务是一个select语句，该语句没有使用<span class="hljs-keyword">for</span> update或者shared mode锁，并且执行开启了autocommit，因此事务只包含一个语句。当TRX_AUTOCOMMIT_NON_LOCKING和TRX_IS_READ_ONLY同时为1，innodb通过降低事务开销和改变表数据库来优化事务。<br></code></pre></td></tr></table></figure>
+
+
+
+<p>（2）查询锁的情况</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript">SELECT * <span class="hljs-keyword">from</span> performance_schema.data_locks<span class="hljs-string">\G;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs inform7">ENGINE：持有或请求锁定的存储引擎<br>ENGINE_LOCK_ID：存储引擎持有或请求的锁的ID，锁ID格式是内部的，随时可能更改。<br>ENGINE_TRANSACTION_ID：请求锁定的事务存储引擎内部ID，可以将其视为锁的所有者<br>THREAD_ID：对应事务的线程ID，如果需要获取更详细的信息，需要关联threads表的THREAD_ID<br>EVENT_ID：指明造成锁的EVENT_ID，THREAD_ID+EVENT_ID对应parent EVENT，可以在以下几张表内获得信息<br>events_waits_xx表查看等待事件<br>events_stages_xxx查看到了哪个阶段<br>events_statements_xx表查看对应的SQL语句<br>events_transactions_current对应查看事务信息<br>OBJECT_SCHEMA：对应锁表的schema名称<br>OBJECT_NAME：对应锁的表名<br>PARTITION_NAME：对应锁的分区名<br>SUBPARTITION_NAME：对应锁的子分区名<br>INDEX_NAME：锁对应的索引名称，InnoDB表不会为NULL<br>OBJECT_INSTANCE_BEGIN：锁对应的内存地址<br>LOCK_TYPE：对应的锁类型，对InnoDB而言，可为表锁或者行锁<br>LOCK_MODE：锁模式，对应值可能为S<span class="hljs-comment">[,GAP]</span>, X<span class="hljs-comment">[, GAP]</span>, <span class="hljs-keyword">IS</span><span class="hljs-comment">[,GAP]</span>, IX<span class="hljs-comment">[,GAP]</span>, AUTO_INC和UNKNOWN<br>LOCK_STATUS：锁状态，可能为GRANTED或者WAITING<br>LOCK_DATA：锁对应的数据，例如如果锁定的是主键，那么该列对应的就是加锁的主键值<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- col1为辅助索引，索引名为c</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> test.col1<span class="hljs-operator">&gt;=</span><span class="hljs-number">10</span> <span class="hljs-keyword">and</span> test.col1<span class="hljs-operator">&lt;</span><span class="hljs-number">11</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">update</span>;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925201840219.png" srcset="/img/loading.gif" lazyload alt="image-20220925201840219"></p>
+<p>（3）查询锁等待情况</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> data_lock_waits\G;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">ENGINE：请求的锁的引擎<br>REQUESTING_ENGINE_LOCK_ID：请求的锁在存储引擎中的锁ID<br>REQUESTING_ENGINE_TRANSACTION_ID：请求锁的事务对应的事务ID<br>REQUESTING_THREAD_ID：请求锁的线程ID<br>REQUESTING_EVENT_ID：请求锁的EVENT ID<br>REQUESTING_OBJECT_INSTANCE_BEGIN：请求的锁的内存地址<br><span class="hljs-keyword">BLOCKING_ENGINE_LOCK_ID：阻塞的锁的ID，对应data_locks表的ENGINE_LOCK_ID列</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">BLOCKING_ENGINE_TRANSACTION_ID：锁阻塞的事务ID</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">BLOCKING_THREAD_ID：锁阻塞的线程ID</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">BLOCKING_EVENT_ID：锁阻塞的EVENT </span>ID<br><span class="hljs-keyword">BLOCKING_OBJECT_INSTANCE_BEGIN：阻塞的锁内存地址</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">insert</span> into test values(<span class="hljs-number">8</span>,<span class="hljs-number">8</span>,<span class="hljs-number">8</span>);<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/image-20220925201633279.png" srcset="/img/loading.gif" lazyload alt="image-20220925201633279"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/MySQL/" class="category-chain-item">MySQL</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>锁</div>
+      <div>https://blog.ygbs.site/2022/09/25/锁-锁md/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/01/26/hello-world/" title="Hello World">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/09/Queue-queuemd/" title="Queue">
+                        <span class="hidden-mobile">Queue</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

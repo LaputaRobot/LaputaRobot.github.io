@@ -16,21 +16,22 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="获取与使用123456789101112131415161718192021public class TestUnsafe &amp;#123;    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException &amp;#123;        Field theUnsafe &#x3D; Unsaf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://blog.ygbs.site/2023/01/26/hello-world/index.html">
+<meta property="og:title" content="Unsafe">
+<meta property="og:url" content="https://blog.ygbs.site/2022/04/03/Unsafe-unsafemd/index.html">
 <meta property="og:site_name" content="Laputa&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="获取与使用123456789101112131415161718192021public class TestUnsafe &amp;#123;    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException &amp;#123;        Field theUnsafe &#x3D; Unsaf">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-26T07:16:50.894Z">
-<meta property="article:modified_time" content="2023-01-26T07:16:50.894Z">
+<meta property="article:published_time" content="2022-04-03T12:13:55.931Z">
+<meta property="article:modified_time" content="2022-04-03T12:14:31.761Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CAS">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hello World - Laputa&#39;s Blog</title>
+  <title>Unsafe - Laputa&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="Unsafe"></span>
           
         </div>
 
@@ -207,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-26 15:16" pubdate>
-          2023年1月26日 下午
+        <time datetime="2022-04-03 20:13" pubdate>
+          2022年4月3日 晚上
         </time>
       </span>
     
@@ -219,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          367 字
+          1.3k 字
         
       </span>
     
@@ -230,7 +231,7 @@
         
         
         
-          4 分钟
+          12 分钟
         
       </span>
     
@@ -268,25 +269,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hello World</h1>
+            <h1 style="display: none">Unsafe</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+                <h1 id="获取与使用"><a href="#获取与使用" class="headerlink" title="获取与使用"></a>获取与使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestUnsafe</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> NoSuchFieldException, IllegalAccessException &#123;<br>        <span class="hljs-type">Field</span> <span class="hljs-variable">theUnsafe</span> <span class="hljs-operator">=</span> Unsafe.class.getDeclaredField(<span class="hljs-string">&quot;theUnsafe&quot;</span>);<br>        theUnsafe.setAccessible(<span class="hljs-literal">true</span>);<br>        <span class="hljs-type">Unsafe</span> <span class="hljs-variable">unsafe</span> <span class="hljs-operator">=</span> (Unsafe) theUnsafe.get(<span class="hljs-literal">null</span>);<br><br>        System.out.println(unsafe);<br><br>        <span class="hljs-comment">// 1. 获取域的偏移地址</span><br>        <span class="hljs-type">long</span> <span class="hljs-variable">idOffset</span> <span class="hljs-operator">=</span> unsafe.objectFieldOffset(Teacher.class.getDeclaredField(<span class="hljs-string">&quot;id&quot;</span>));<br>        <span class="hljs-type">long</span> <span class="hljs-variable">nameOffset</span> <span class="hljs-operator">=</span> unsafe.objectFieldOffset(Teacher.class.getDeclaredField(<span class="hljs-string">&quot;name&quot;</span>));<br><br>        <span class="hljs-type">Teacher</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Teacher</span>();<br>        <span class="hljs-comment">// 2. 执行 cas 操作</span><br>        unsafe.compareAndSwapInt(t, idOffset, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>        unsafe.compareAndSwapObject(t, nameOffset, <span class="hljs-literal">null</span>, <span class="hljs-string">&quot;张三&quot;</span>);<br><br>        <span class="hljs-comment">// 3. 验证</span><br>        System.out.println(t);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+<h1 id="实现原子类"><a href="#实现原子类" class="headerlink" title="实现原子类"></a>实现原子类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyAtomicInteger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Account</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> value;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> valueOffset;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Unsafe UNSAFE;<br>    <span class="hljs-keyword">static</span> &#123;<br>        UNSAFE = UnsafeAccessor.getUnsafe();<br>        <span class="hljs-keyword">try</span> &#123;<br>            valueOffset = UNSAFE.objectFieldOffset(MyAtomicInteger.class.getDeclaredField(<span class="hljs-string">&quot;value&quot;</span>));<br>        &#125; <span class="hljs-keyword">catch</span> (NoSuchFieldException e) &#123;<br>            e.printStackTrace();<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getValue</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> value;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">decrement</span><span class="hljs-params">(<span class="hljs-type">int</span> amount)</span> &#123;<br>        <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.value;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> prev - amount;<br>            <span class="hljs-keyword">if</span> (UNSAFE.compareAndSwapInt(<span class="hljs-built_in">this</span>, valueOffset, prev, next)) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125; <br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -294,6 +284,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/java%E5%B9%B6%E5%8F%91-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">java并发 | 设计模式</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CAS/">#CAS</a>
+      
+    </div>
   
 </div>
 
@@ -303,8 +321,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>https://blog.ygbs.site/2023/01/26/hello-world/</div>
+      <div>Unsafe</div>
+      <div>https://blog.ygbs.site/2022/04/03/Unsafe-unsafemd/</div>
     </div>
     <div class="license-meta">
       
@@ -316,7 +334,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月26日</div>
+          <div>2022年4月3日</div>
         </div>
       
       
@@ -348,9 +366,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章">
+                      <a href="/2022/04/08/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis数据类型">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">测试文章</span>
+                        <span class="hidden-mobile">Redis数据类型</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -358,8 +376,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/25/%E9%94%81-%E9%94%81md/" title="锁">
-                        <span class="hidden-mobile">锁</span>
+                      <a href="/2022/04/03/%E5%8E%9F%E5%AD%90%E6%95%B0%E6%8D%AE-%E5%8E%9F%E5%AD%90%E6%95%B0%E6%8D%AE/" title="原子数据">
+                        <span class="hidden-mobile">原子数据</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
