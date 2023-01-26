@@ -4,38 +4,6 @@
   
   
   <entry>
-    <title>测试文章</title>
-    <link href="/2023/01/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0.md/"/>
-    <url>/2023/01/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0.md/</url>
-    
-    <content type="html"><![CDATA[<p>测试</p>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>java</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2023/01/26/hello/"/>
-    <url>/2023/01/26/hello/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>锁</title>
     <link href="/2022/09/25/%E9%94%81/"/>
     <url>/2022/09/25/%E9%94%81/</url>
@@ -402,19 +370,6 @@
       <tag>锁</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello Halo</title>
-    <link href="/2022/04/02/Hello%20Halo/"/>
-    <url>/2022/04/02/Hello%20Halo/</url>
-    
-    <content type="html"><![CDATA[<h2 id="Hello-Halo"><a href="#Hello-Halo" class="headerlink" title="Hello Halo"></a>Hello Halo</h2><p>如果你看到了这一篇文章，那么证明你已经安装成功了，感谢使用 <a href="https://halo.run/">Halo</a> 进行创作，希望能够使用愉快。</p><h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul><li>官网：<a href="https://halo.run/">https://halo.run</a></li><li>文档：<a href="https://docs.halo.run/">https://docs.halo.run</a></li><li>社区：<a href="https://bbs.halo.run/">https://bbs.halo.run</a></li><li>主题仓库：<a href="https://halo.run/themes.html">https://halo.run/themes.html</a></li><li>开源地址：<a href="https://github.com/halo-dev/halo">https://github.com/halo-dev/halo</a></li></ul><p>在使用过程中，有任何问题都可以通过以上链接找寻答案，或者联系我们。</p><blockquote><p>这是一篇自动生成的文章，请删除这篇文章之后开始你的创作吧！</p></blockquote>]]></content>
-    
-    
     
   </entry>
   
