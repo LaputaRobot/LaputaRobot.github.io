@@ -1,307 +1,163 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fac.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Laputa">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="原子整数J.U.C 并发包提供了：  AtomicBoolean  AtomicInteger  AtomicLong 以 AtomicInteger 为例   调用Unsafe的compareAndSwapInt实现 123456789101112131415161718192021222324252627AtomicInteger i &#x3D; new AtomicInteger(0);&#x2F;&#x2F; 获取并">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>原子数据 | Laputa's Blog</title><meta name="author" content="Laputa,gbyue@outlook.com"><meta name="copyright" content="Laputa"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="原子整数J.U.C 并发包提供了：  AtomicBoolean  AtomicInteger  AtomicLong 以 AtomicInteger 为例   调用Unsafe的compareAndSwapInt实现 123456789101112131415161718192021222324252627AtomicInteger i &#x3D; new AtomicInteger(0);&#x2F;&#x2F; 获取并">
 <meta property="og:type" content="article">
 <meta property="og:title" content="原子数据">
 <meta property="og:url" content="https://blog.ygbs.site/2022/04/03/%E5%8E%9F%E5%AD%90%E6%95%B0%E6%8D%AE/index.html">
 <meta property="og:site_name" content="Laputa&#39;s Blog">
 <meta property="og:description" content="原子整数J.U.C 并发包提供了：  AtomicBoolean  AtomicInteger  AtomicLong 以 AtomicInteger 为例   调用Unsafe的compareAndSwapInt实现 123456789101112131415161718192021222324252627AtomicInteger i &#x3D; new AtomicInteger(0);&#x2F;&#x2F; 获取并">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%282%29.jpg">
 <meta property="article:published_time" content="2022-04-03T11:57:02.804Z">
 <meta property="article:modified_time" content="2022-04-03T11:57:58.508Z">
 <meta property="article:author" content="Laputa">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="java内存模型">
 <meta property="article:tag" content="CAS">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>原子数据 - Laputa&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.ygbs.site","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"6x2bYvBH3NtcW8NzvVQ42YIH-MdYXbMMI","app_key":"wlAbNYTp2O06rFEgT9A6afOU","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%282%29.jpg"><link rel="shortcut icon" href="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/fac.png"><link rel="canonical" href="https://blog.ygbs.site/2022/04/03/%E5%8E%9F%E5%AD%90%E6%95%B0%E6%8D%AE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
     }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '原子数据',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-03 19:57:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
   
-
-  
-
-  
-
-  
-
-  
-
-  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-  
-
-
-
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-
-<body>
-  
-
-  <header>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Laputa&#39;s Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/post.jpg') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="原子数据"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-04-03 19:57" pubdate>
-          2022年4月3日 晚上
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          4.4k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          37 分钟
-        
-      </span>
-    
-
-    
-    
-      
-        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="leancloud-page-views"></span>次
-        </span>
-        
-      
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">原子数据</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <h1 id="原子整数"><a href="#原子整数" class="headerlink" title="原子整数"></a>原子整数</h1><p><code>J.U.C </code>并发包提供了：</p>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/l_a_p_u_t_a_by_blargen69_dbaa31z-pre.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%282%29.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Laputa's Blog"><span class="site-name">Laputa's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">原子数据</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-03T11:57:02.804Z" title="发表于 2022-04-03 19:57:02">2022-04-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-03T11:57:58.508Z" title="更新于 2022-04-03 19:57:58">2022-04-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java%E5%B9%B6%E5%8F%91/">java并发</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java%E5%B9%B6%E5%8F%91/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="原子数据"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="原子整数"><a href="#原子整数" class="headerlink" title="原子整数"></a>原子整数</h1><p><code>J.U.C </code>并发包提供了：</p>
 <ul>
 <li><p><code>AtomicBoolean</code></p>
 </li>
@@ -312,13 +168,13 @@
 </li>
 </ul>
 <p>调用Unsafe的<code>compareAndSwapInt</code>实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">AtomicInteger</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicInteger</span>(<span class="hljs-number">0</span>);<br><span class="hljs-comment">// 获取并自增（i = 0, 结果 i = 1, 返回 0），类似于 i++</span><br>System.out.println(i.getAndIncrement());<br><span class="hljs-comment">// 自增并获取（i = 1, 结果 i = 2, 返回 2），类似于 ++i</span><br>System.out.println(i.incrementAndGet());<br><span class="hljs-comment">// 自减并获取（i = 2, 结果 i = 1, 返回 1），类似于 --i</span><br>System.out.println(i.decrementAndGet());<br><span class="hljs-comment">// 获取并自减（i = 1, 结果 i = 0, 返回 1），类似于 i--</span><br>System.out.println(i.getAndDecrement());<br><span class="hljs-comment">// 获取并加值（i = 0, 结果 i = 5, 返回 0）</span><br>System.out.println(i.getAndAdd(<span class="hljs-number">5</span>));<br><span class="hljs-comment">// 加值并获取（i = 5, 结果 i = 0, 返回 0）</span><br>System.out.println(i.addAndGet(-<span class="hljs-number">5</span>));<br><span class="hljs-comment">// 获取并更新（i = 0, p 为 i 的当前值, 结果 i = -2, 返回 0）</span><br><span class="hljs-comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span><br>System.out.println(i.getAndUpdate(p -&gt; p - <span class="hljs-number">2</span>));<br><span class="hljs-comment">// 更新并获取（i = -2, p 为 i 的当前值, 结果 i = 0, 返回 0）</span><br><span class="hljs-comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span><br>System.out.println(i.updateAndGet(p -&gt; p + <span class="hljs-number">2</span>));<br><span class="hljs-comment">// 获取并计算（i = 0, p 为 i 的当前值, x 为参数1, 结果 i = 10, 返回 0）</span><br><span class="hljs-comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span><br><span class="hljs-comment">// getAndUpdate 如果在 lambda 中引用了外部的局部变量，要保证该局部变量是 final 的</span><br><span class="hljs-comment">// getAndAccumulate 可以通过 参数1 来引用外部的局部变量，但因为其不在 lambda 中因此不必是 final</span><br>System.out.println(i.getAndAccumulate(<span class="hljs-number">10</span>, (p, x) -&gt; p + x));<br><span class="hljs-comment">// 计算并获取（i = 10, p 为 i 的当前值, x 为参数1, 结果 i = 0, 返回 0）</span><br><span class="hljs-comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span><br>System.out.println(i.accumulateAndGet(-<span class="hljs-number">10</span>, (p, x) -&gt; p + x));<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">AtomicInteger</span> <span class="variable">i</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 获取并自增（i = 0, 结果 i = 1, 返回 0），类似于 i++</span></span><br><span class="line">System.out.println(i.getAndIncrement());</span><br><span class="line"><span class="comment">// 自增并获取（i = 1, 结果 i = 2, 返回 2），类似于 ++i</span></span><br><span class="line">System.out.println(i.incrementAndGet());</span><br><span class="line"><span class="comment">// 自减并获取（i = 2, 结果 i = 1, 返回 1），类似于 --i</span></span><br><span class="line">System.out.println(i.decrementAndGet());</span><br><span class="line"><span class="comment">// 获取并自减（i = 1, 结果 i = 0, 返回 1），类似于 i--</span></span><br><span class="line">System.out.println(i.getAndDecrement());</span><br><span class="line"><span class="comment">// 获取并加值（i = 0, 结果 i = 5, 返回 0）</span></span><br><span class="line">System.out.println(i.getAndAdd(<span class="number">5</span>));</span><br><span class="line"><span class="comment">// 加值并获取（i = 5, 结果 i = 0, 返回 0）</span></span><br><span class="line">System.out.println(i.addAndGet(-<span class="number">5</span>));</span><br><span class="line"><span class="comment">// 获取并更新（i = 0, p 为 i 的当前值, 结果 i = -2, 返回 0）</span></span><br><span class="line"><span class="comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span></span><br><span class="line">System.out.println(i.getAndUpdate(p -&gt; p - <span class="number">2</span>));</span><br><span class="line"><span class="comment">// 更新并获取（i = -2, p 为 i 的当前值, 结果 i = 0, 返回 0）</span></span><br><span class="line"><span class="comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span></span><br><span class="line">System.out.println(i.updateAndGet(p -&gt; p + <span class="number">2</span>));</span><br><span class="line"><span class="comment">// 获取并计算（i = 0, p 为 i 的当前值, x 为参数1, 结果 i = 10, 返回 0）</span></span><br><span class="line"><span class="comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span></span><br><span class="line"><span class="comment">// getAndUpdate 如果在 lambda 中引用了外部的局部变量，要保证该局部变量是 final 的</span></span><br><span class="line"><span class="comment">// getAndAccumulate 可以通过 参数1 来引用外部的局部变量，但因为其不在 lambda 中因此不必是 final</span></span><br><span class="line">System.out.println(i.getAndAccumulate(<span class="number">10</span>, (p, x) -&gt; p + x));</span><br><span class="line"><span class="comment">// 计算并获取（i = 10, p 为 i 的当前值, x 为参数1, 结果 i = 0, 返回 0）</span></span><br><span class="line"><span class="comment">// 其中函数中的操作能保证原子，但函数需要无副作用</span></span><br><span class="line">System.out.println(i.accumulateAndGet(-<span class="number">10</span>, (p, x) -&gt; p + x));</span><br></pre></td></tr></table></figure>
 
 <h1 id="原子引用"><a href="#原子引用" class="headerlink" title="原子引用"></a>原子引用</h1><p>调用Unsafe的<code>compareAndSwapObject</code>实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">withdraw</span><span class="hljs-params">(BigDecimal amount)</span> &#123;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) &#123;<br>        <span class="hljs-type">BigDecimal</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> balance.get();<br>        <span class="hljs-type">BigDecimal</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> prev.subtract(amount);<br>        <span class="hljs-keyword">if</span> (balance.compareAndSet(prev, next)) &#123;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">withdraw</span><span class="params">(BigDecimal amount)</span> &#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">prev</span> <span class="operator">=</span> balance.get();</span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">next</span> <span class="operator">=</span> prev.subtract(amount);</span><br><span class="line">        <span class="keyword">if</span> (balance.compareAndSet(prev, next)) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h1><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>使用<code>AtomicStampedReference</code>或者<code>AtomicMarkableReference</code>（只有两种状态）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test36</span> &#123;<br><br>    <span class="hljs-keyword">static</span> AtomicStampedReference&lt;String&gt; ref = <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicStampedReference</span>&lt;&gt;(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-number">0</span>);<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>        log.debug(<span class="hljs-string">&quot;main start...&quot;</span>);<br>        <span class="hljs-comment">// 获取值 A</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> ref.getReference();<br>        <span class="hljs-comment">// 获取版本号</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">stamp</span> <span class="hljs-operator">=</span> ref.getStamp();<br>        log.debug(<span class="hljs-string">&quot;版本 &#123;&#125;&quot;</span>, stamp);<br>        <span class="hljs-comment">// 如果中间有其它线程干扰，发生了 ABA 现象</span><br>        other();<br>        sleep(<span class="hljs-number">1</span>);<br>        <span class="hljs-comment">// 尝试改为 C</span><br>        log.debug(<span class="hljs-string">&quot;change A-&gt;C &#123;&#125;&quot;</span>, ref.compareAndSet(prev, <span class="hljs-string">&quot;C&quot;</span>, stamp, stamp + <span class="hljs-number">1</span>));<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">other</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>            log.debug(<span class="hljs-string">&quot;change A-&gt;B &#123;&#125;&quot;</span>, ref.compareAndSet(ref.getReference(), <span class="hljs-string">&quot;B&quot;</span>, ref.getStamp(), ref.getStamp() + <span class="hljs-number">1</span>));<br>            log.debug(<span class="hljs-string">&quot;更新版本为 &#123;&#125;&quot;</span>, ref.getStamp());<br>        &#125;, <span class="hljs-string">&quot;t1&quot;</span>).start();<br>        sleep(<span class="hljs-number">0.5</span>);<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>            log.debug(<span class="hljs-string">&quot;change B-&gt;A &#123;&#125;&quot;</span>, ref.compareAndSet(ref.getReference(), <span class="hljs-string">&quot;A&quot;</span>, ref.getStamp(), ref.getStamp() + <span class="hljs-number">1</span>));<br>            log.debug(<span class="hljs-string">&quot;更新版本为 &#123;&#125;&quot;</span>, ref.getStamp());<br>        &#125;, <span class="hljs-string">&quot;t2&quot;</span>).start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test36</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> AtomicStampedReference&lt;String&gt; ref = <span class="keyword">new</span> <span class="title class_">AtomicStampedReference</span>&lt;&gt;(<span class="string">&quot;A&quot;</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;main start...&quot;</span>);</span><br><span class="line">        <span class="comment">// 获取值 A</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">prev</span> <span class="operator">=</span> ref.getReference();</span><br><span class="line">        <span class="comment">// 获取版本号</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">stamp</span> <span class="operator">=</span> ref.getStamp();</span><br><span class="line">        log.debug(<span class="string">&quot;版本 &#123;&#125;&quot;</span>, stamp);</span><br><span class="line">        <span class="comment">// 如果中间有其它线程干扰，发生了 ABA 现象</span></span><br><span class="line">        other();</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 尝试改为 C</span></span><br><span class="line">        log.debug(<span class="string">&quot;change A-&gt;C &#123;&#125;&quot;</span>, ref.compareAndSet(prev, <span class="string">&quot;C&quot;</span>, stamp, stamp + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">other</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;change A-&gt;B &#123;&#125;&quot;</span>, ref.compareAndSet(ref.getReference(), <span class="string">&quot;B&quot;</span>, ref.getStamp(), ref.getStamp() + <span class="number">1</span>));</span><br><span class="line">            log.debug(<span class="string">&quot;更新版本为 &#123;&#125;&quot;</span>, ref.getStamp());</span><br><span class="line">        &#125;, <span class="string">&quot;t1&quot;</span>).start();</span><br><span class="line">        sleep(<span class="number">0.5</span>);</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;change B-&gt;A &#123;&#125;&quot;</span>, ref.compareAndSet(ref.getReference(), <span class="string">&quot;A&quot;</span>, ref.getStamp(), ref.getStamp() + <span class="number">1</span>));</span><br><span class="line">            log.debug(<span class="string">&quot;更新版本为 &#123;&#125;&quot;</span>, ref.getStamp());</span><br><span class="line">        &#125;, <span class="string">&quot;t2&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="原子数组"><a href="#原子数组" class="headerlink" title="原子数组"></a>原子数组</h1><p>实现对数组内元素更改的线程安全</p>
 <ul>
@@ -326,7 +182,7 @@
 <li><code>AtomicLongArray</code></li>
 <li><code>AtomicReferenceArray</code></li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">demo(<br>()-&gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicIntegerArray</span>(<span class="hljs-number">10</span>),<br>(array) -&gt; array.length(),<br>(array, index) -&gt; array.getAndIncrement(index),<br>array -&gt; System.out.println(array)<br>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">demo(</span><br><span class="line">()-&gt; <span class="keyword">new</span> <span class="title class_">AtomicIntegerArray</span>(<span class="number">10</span>),</span><br><span class="line">(array) -&gt; array.length(),</span><br><span class="line">(array, index) -&gt; array.getAndIncrement(index),</span><br><span class="line">array -&gt; System.out.println(array)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 <h1 id="字段更新器"><a href="#字段更新器" class="headerlink" title="字段更新器"></a>字段更新器</h1><p>实现对类的属性更改的线程安全</p>
 <ul>
@@ -338,452 +194,14 @@
 <p>利用字段更新器，可以针对对象的某个域（Field）进行原子操作，只能配合 volatile 修饰的字段使用，否则会出现异常</p>
 </blockquote>
 <h1 id="原子累加器"><a href="#原子累加器" class="headerlink" title="原子累加器"></a>原子累加器</h1><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p><code>LongAdder</code>性能比<code>AtomicLong</code>好。提升的原因很简单，就是在有竞争时，设置多个累加单元，<code>Therad-0 </code>累加<code> Cell[0]</code>，而 <code>Thread-1 </code>累加<code>Cell[1]... </code>最后将结果汇总。这样它们在累加时操作的不同的 <code>Cell</code> 变量，因此减少了<code>CAS</code>重试失败，从而提高性能。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;<br>    demo(<br>            () -&gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicLong</span>(<span class="hljs-number">0</span>), <span class="hljs-comment">// 使用AtomicLong进行累加</span><br>            AtomicLong::getAndIncrement<br>    );<br>&#125;<br><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;<br>    demo(<br>            LongAdder::<span class="hljs-keyword">new</span>,<br>            LongAdder::increment <span class="hljs-comment">//// 使用LongAdder进行累加</span><br>    );<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    demo(</span><br><span class="line">            () -&gt; <span class="keyword">new</span> <span class="title class_">AtomicLong</span>(<span class="number">0</span>), <span class="comment">// 使用AtomicLong进行累加</span></span><br><span class="line">            AtomicLong::getAndIncrement</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    demo(</span><br><span class="line">            LongAdder::<span class="keyword">new</span>,</span><br><span class="line">            LongAdder::increment <span class="comment">//// 使用LongAdder进行累加</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="CAS锁"><a href="#CAS锁" class="headerlink" title="CAS锁"></a>CAS锁</h2><blockquote>
 <p>不要用于实践！！！</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LockCas</span> &#123;<br>    <span class="hljs-comment">// 0 没加锁</span><br>    <span class="hljs-comment">// 1 加锁</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">AtomicInteger</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicInteger</span>(<span class="hljs-number">0</span>);<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lock</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>            <span class="hljs-keyword">if</span> (state.compareAndSet(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">unlock</span><span class="hljs-params">()</span> &#123;<br>        log.debug(<span class="hljs-string">&quot;unlock...&quot;</span>);<br>        state.set(<span class="hljs-number">0</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">LockCas</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LockCas</span>();<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>            log.debug(<span class="hljs-string">&quot;begin...&quot;</span>);<br>            lock.lock();<br>            <span class="hljs-keyword">try</span> &#123;<br>                log.debug(<span class="hljs-string">&quot;lock...&quot;</span>);<br>                sleep(<span class="hljs-number">1</span>);<br>            &#125; <span class="hljs-keyword">finally</span> &#123;<br>                lock.unlock();<br>            &#125;<br>        &#125;).start();<br><br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>            log.debug(<span class="hljs-string">&quot;begin...&quot;</span>);<br>            lock.lock();<br>            <span class="hljs-keyword">try</span> &#123;<br>                log.debug(<span class="hljs-string">&quot;lock...&quot;</span>);<br>            &#125; <span class="hljs-keyword">finally</span> &#123;<br>                lock.unlock();<br>            &#125;<br>        &#125;).start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LockCas</span> &#123;</span><br><span class="line">    <span class="comment">// 0 没加锁</span></span><br><span class="line">    <span class="comment">// 1 加锁</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">AtomicInteger</span> <span class="variable">state</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">lock</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (state.compareAndSet(<span class="number">0</span>, <span class="number">1</span>)) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">unlock</span><span class="params">()</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;unlock...&quot;</span>);</span><br><span class="line">        state.set(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">LockCas</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LockCas</span>();</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;begin...&quot;</span>);</span><br><span class="line">            lock.lock();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                log.debug(<span class="string">&quot;lock...&quot;</span>);</span><br><span class="line">                sleep(<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            log.debug(<span class="string">&quot;begin...&quot;</span>);</span><br><span class="line">            lock.lock();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                log.debug(<span class="string">&quot;lock...&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="LongAdder原理"><a href="#LongAdder原理" class="headerlink" title="LongAdder原理"></a>LongAdder原理</h2><p>因为 Cell 是数组形式，在内存中是连续存储的，一个 Cell 为 24 字节（16 字节的对象头和 8 字节的 value），因此缓存行可以存下 2 个的 Cell 对象。这样问题来了：<br>Core-0 要修改 Cell[0]<br>Core-1 要修改 Cell[1]</p>
 <p>无论谁修改成功，都会导致对方 Core 的缓存行失效，比如 Core-0 中 Cell[0]&#x3D;6000, Cell[1]&#x3D;8000 要累加Cell[0]&#x3D;6001, Cell[1]&#x3D;8000 ，这时会让 Core-1 的缓存行失效</p>
 <p>@sun.misc.Contended 用来解决这个问题，它的原理是在使用此注解的对象或字段的前后各增加 128 字节大小的padding，从而让 CPU 将对象预读至缓存时占用不同的缓存行，这样，不会造成对方缓存行的失效</p>
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/java%E5%B9%B6%E5%8F%91/" class="category-chain-item">java并发</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/java%E5%B9%B6%E5%8F%91/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/java/">#java</a>
-      
-        <a href="/tags/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">#java内存模型</a>
-      
-        <a href="/tags/CAS/">#CAS</a>
-      
-    </div>
-  
-</div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>原子数据</div>
-      <div>https://blog.ygbs.site/2022/04/03/原子数据/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Laputa</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年4月3日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2022/04/03/Unsafe/" title="Unsafe">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Unsafe</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2022/04/03/CAS%E5%8E%9F%E7%90%86%E4%B8%8E%E7%89%B9%E7%82%B9/" title="CAS原理与特点">
-                        <span class="hidden-mobile">CAS原理与特点</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-  
-  
-    <article id="comments" lazyload>
-      
-  <div id="valine"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
-        var options = Object.assign(
-          {"appId":"6x2bYvBH3NtcW8NzvVQ42YIH-MdYXbMMI","appKey":"wlAbNYTp2O06rFEgT9A6afOU","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
-          {
-            el: "#valine",
-            path: window.location.pathname
-          }
-        )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
-          Fluid.plugins.imageCaption(imgSelector);
-          Fluid.plugins.fancyBox(imgSelector);
-        })
-      });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
-
-
-    </article>
-  
-
-
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-    <div class="statistics">
-  
-  
-
-  
-    
-      <span id="leancloud-site-pv-container" style="display: none">
-        总访问量 
-        <span id="leancloud-site-pv"></span>
-         次
-      </span>
-    
-    
-      <span id="leancloud-site-uv-container" style="display: none">
-        总访客数 
-        <span id="leancloud-site-uv"></span>
-         人
-      </span>
-    
-    
-
-  
-</div>
-
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script defer src="/js/leancloud.js" ></script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
-</body>
-</html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.ygbs.site">Laputa</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.ygbs.site/2022/04/03/%E5%8E%9F%E5%AD%90%E6%95%B0%E6%8D%AE/">https://blog.ygbs.site/2022/04/03/%E5%8E%9F%E5%AD%90%E6%95%B0%E6%8D%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.ygbs.site" target="_blank">Laputa's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/java/">java</a><a class="post-meta__tags" href="/tags/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">java内存模型</a><a class="post-meta__tags" href="/tags/CAS/">CAS</a></div><div class="post_share"><div class="social-share" data-image="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%282%29.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/04/03/Unsafe/" title="Unsafe"><img class="cover" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/24d9fd45555503.5834d22eb4b38.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Unsafe</div></div></a></div><div class="next-post pull-right"><a href="/2022/04/03/CAS%E5%8E%9F%E7%90%86%E4%B8%8E%E7%89%B9%E7%82%B9/" title="CAS原理与特点"><img class="cover" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/24d9fd45555503.5834d22eb4b38.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CAS原理与特点</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/04/03/CAS%E5%8E%9F%E7%90%86%E4%B8%8E%E7%89%B9%E7%82%B9/" title="CAS原理与特点"><img class="cover" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/24d9fd45555503.5834d22eb4b38.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-03</div><div class="title">CAS原理与特点</div></div></a></div><div><a href="/2022/04/03/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B--%E5%8F%AF%E8%A7%81%E6%80%A7/" title="JAVA内存模型--可见性"><img class="cover" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%282%29.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-03</div><div class="title">JAVA内存模型--可见性</div></div></a></div><div><a href="/2022/04/03/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B--%E6%9C%89%E5%BA%8F%E6%80%A7/" title="JAVA内存模型--有序性"><img class="cover" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%284%29.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-03</div><div class="title">JAVA内存模型--有序性</div></div></a></div><div><a href="/2022/04/02/%E9%87%8D%E5%85%A5%E9%94%81/" title="重入锁"><img class="cover" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%282%29.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-02</div><div class="title">重入锁</div></div></a></div><div><a href="/2022/04/03/Unsafe/" title="Unsafe"><img class="cover" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/24d9fd45555503.5834d22eb4b38.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-03</div><div class="title">Unsafe</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/l_a_p_u_t_a_by_blargen69_dbaa31z-pre.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Laputa</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LaputaRobot" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2524777478@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://message/?uin=2524777478&amp;Site=&amp;Menu=yes" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E6%95%B4%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">原子整数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E5%BC%95%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">原子引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ABA%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">ABA问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-number">3.1.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E6%95%B0%E7%BB%84"><span class="toc-number">4.</span> <span class="toc-text">原子数组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E6%9B%B4%E6%96%B0%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">字段更新器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E7%B4%AF%E5%8A%A0%E5%99%A8"><span class="toc-number">6.</span> <span class="toc-text">原子累加器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">6.1.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAS%E9%94%81"><span class="toc-number">6.2.</span> <span class="toc-text">CAS锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LongAdder%E5%8E%9F%E7%90%86"><span class="toc-number">6.3.</span> <span class="toc-text">LongAdder原理</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Laputa</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to Laputa's Blog <a target="_blank" rel="noopener" href="https://blog.hellook.top/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

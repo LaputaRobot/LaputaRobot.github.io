@@ -1,1000 +1,305 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fac.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Laputa">
-  <meta name="keywords" content="">
-  
-    <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Laputa's Blog - 🔮充满希望 | 保持敬畏🛸</title><meta name="author" content="Laputa,gbyue@outlook.com"><meta name="copyright" content="Laputa"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Laputa&#39;s Blog">
 <meta property="og:url" content="https://blog.ygbs.site/index.html">
 <meta property="og:site_name" content="Laputa&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/l_a_p_u_t_a_by_blargen69_dbaa31z-pre.jpg">
 <meta property="article:author" content="Laputa">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>Laputa&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.ygbs.site","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"6x2bYvBH3NtcW8NzvVQ42YIH-MdYXbMMI","app_key":"wlAbNYTp2O06rFEgT9A6afOU","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/l_a_p_u_t_a_by_blargen69_dbaa31z-pre.jpg"><link rel="shortcut icon" href="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/fac.png"><link rel="canonical" href="https://blog.ygbs.site/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
     }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-  
-
-
-
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-
-<body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 50vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Laputa&#39;s Blog</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/post.jpg') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="Welcom to Laputa&#39;s Blog!"></span>
-          
-        </div>
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/09/25/%E9%94%81/" target="_self">
-          锁
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/09/25/%E9%94%81/" target="_self">
-        <div>
-          事务的隔离性由锁实现 锁结构当一个事务想对这条记录做改动时，首先会看看内存中有没有与这条记录关联的锁结构，当没有的时候就会在内存中生成一个锁结构与之关联。  锁内存结构InnoDB 存储引擎中的 锁结构 如下：   锁所在的事务信息 ：  不论是 表锁 还是 行锁 ，都是在事务执行过程中生成的，哪个事务生成了这个 锁结构 ，这里就记录这个 事务的信息。  此 锁所在的事务信息 在内存结构中只是一个
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-09-25 20:46" pubdate>
-              2022-09-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/MySQL%E9%94%81/" class="category-chain-item">MySQL锁</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/09/09/Queue/" target="_self">
-          Queue
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/09/09/Queue/" target="_self">
-        <div>
-          ArrayDequeArrayDeque基于数组实现双端队列，采用head和tail标志队列的头和位，当队列满时，再扩容（两倍）底层的数组的容量； add方法addFirst1234567public void addFirst(E e) &#123;    if (e == null)        throw new NullPointerException();    elements[he
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-09-09 22:54" pubdate>
-              2022-09-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Java%E9%9B%86%E5%90%88/" class="category-chain-item">Java集合</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/08/31/%E6%94%B6%E8%97%8F%E6%96%87%E7%AB%A0/" target="_self">
-          收藏文章
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/08/31/%E6%94%B6%E8%97%8F%E6%96%87%E7%AB%A0/" target="_self">
-        <div>
-          文章spring注解https://blog.csdn.net/w372426096/category_7126824.html 循环依赖https://juejin.cn/post/6985337310472568839 博客基础操作系统https://imageslr.com/
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-08-31 01:04" pubdate>
-              2022-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Spring/" class="category-chain-item">Spring</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Spring/">#Spring</a>
-            
-              <a href="/tags/%E6%B3%A8%E8%A7%A3/">#注解</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/01/HashMap/" target="_self">
-          HashMap
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/01/HashMap/" target="_self">
-        <div>
-          HashMap介绍基于哈希表的Map接口的实现。这个实现提供了所有可选的map操作，并允许空值和空键。(HashMap类大致相当于Hashtable，只是它是非同步的，并且允许为空。)这个类不保证映射的顺序;特别是，它不能保证顺序将随时间保持不变。 这个实现为基本操作(get和put)提供了常数时间的性能，假设散列函数将元素适当地分散到存储桶中。迭代集合视图所需的时间与HashMap实例的“容量”
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-01 21:09" pubdate>
-              2022-05-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Java%E9%9B%86%E5%90%88/" class="category-chain-item">Java集合</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%9B%86%E5%90%88/">#集合</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/01/ArrayList%E5%92%8CLinkedList/" target="_self">
-          ArrayList和LinkedList
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/01/ArrayList%E5%92%8CLinkedList/" target="_self">
-        <div>
-          ArrayList和LinkedList继承和实现关系collection使用集合层次结构中的根界面 。 集合表示一组被称为其元素的对象。  一些集合允许重复元素，而其他集合不允许。 有些被命令和其他无序。  JDK不提供此接口的任何直接实现：它提供了更具体的子接口的实现，如Set和List  。 该界面通常用于传递集合，并在需要最大的通用性的情况下对其进行操作。 方法  List使用有序集合(也
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-01 16:20" pubdate>
-              2022-05-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Java%E9%9B%86%E5%90%88/" class="category-chain-item">Java集合</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%9B%86%E5%90%88/">#集合</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/04/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/" target="_self">
-          数据库系统原理
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/04/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/" target="_self">
-        <div>
-          事务的4大特性ACID 原子性（Atomicity）  事务是不可分割的最小单元，事务的所有操作要么全部提交成功，要么全部失败回滚  一致性（Consistency）  数据库在事务执行前后都保持一致性状态，此时，所有事务对同一数据的读取结果都是相同的。以银行转账事务事务为例。在事务开始之前，所有 账户余额的总额处于一致状态。在事务进行的过程中，一个账户余额减少了，而另一个账户余额尚未修改。因此，
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-09 11:17" pubdate>
-              2022-04-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/04/08/Redis%E4%BA%8B%E5%8A%A1/" target="_self">
-          Redis事务
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/04/08/Redis%E4%BA%8B%E5%8A%A1/" target="_self">
-        <div>
-          定义Redis事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。Redis事务的主要作用就是串联多个命令防止别的命令插队。 使用从输入Multi命令开始，输入的命令都会依次进入命令队列中，但不会执行，直到输入Exec后，Redis会将之前的命令队列中的命令依次执行。组队的过程中可以通过discard来放弃组队。    组
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-08 11:59" pubdate>
-              2022-04-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">#数据库</a>
-            
-              <a href="/tags/Redis/">#Redis</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/04/08/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
-          Redis数据类型
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/04/08/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
-        <div>
-          字符串 是二进制安全的，意味着可以存放图片或者序列化对象  最多可以存512M   命令Redis 操作是原子性的，因为是单线程的  追加 append [key] [value]  获取值长度 strlen 获得值的长度  setnx 只有在 key 不存在时 设置 key 的值  incr 将 key 中储存的数字值增1,只能对数字值操作，如果为空，新增值为1  decr 将 key 中储存的
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-08 11:59" pubdate>
-              2022-04-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">#数据库</a>
-            
-              <a href="/tags/Redis/">#Redis</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/04/03/Unsafe/" target="_self">
-          Unsafe
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/04/03/Unsafe/" target="_self">
-        <div>
-          获取与使用123456789101112131415161718192021public class TestUnsafe &#123;    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException &#123;        Field theUnsafe = Unsaf
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-03 20:13" pubdate>
-              2022-04-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/java%E5%B9%B6%E5%8F%91/" class="category-chain-item">java并发</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/java%E5%B9%B6%E5%8F%91/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CAS/">#CAS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/04/03/%E5%8E%9F%E5%AD%90%E6%95%B0%E6%8D%AE/" target="_self">
-          原子数据
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/04/03/%E5%8E%9F%E5%AD%90%E6%95%B0%E6%8D%AE/" target="_self">
-        <div>
-          原子整数J.U.C 并发包提供了：  AtomicBoolean  AtomicInteger  AtomicLong 以 AtomicInteger 为例   调用Unsafe的compareAndSwapInt实现 123456789101112131415161718192021222324252627AtomicInteger i = new AtomicInteger(0);// 获取并
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-04-03 19:57" pubdate>
-              2022-04-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/java%E5%B9%B6%E5%8F%91/" class="category-chain-item">java并发</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/java%E5%B9%B6%E5%8F%91/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/java/">#java</a>
-            
-              <a href="/tags/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">#java内存模型</a>
-            
-              <a href="/tags/CAS/">#CAS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-    <div class="statistics">
-  
-  
-
-  
-    
-      <span id="leancloud-site-pv-container" style="display: none">
-        总访问量 
-        <span id="leancloud-site-pv"></span>
-         次
-      </span>
-    
-    
-      <span id="leancloud-site-uv-container" style="display: none">
-        总访客数 
-        <span id="leancloud-site-uv"></span>
-         人
-      </span>
-    
-    
-
-  
-</div>
-
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Laputa\'s Blog',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-02-05 00:18:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
       }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
+    }
   
-    <script  src="/js/img-lazyload.js" ></script>
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-
-
-
-
-  <script defer src="/js/leancloud.js" ></script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
   
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/l_a_p_u_t_a_by_blargen69_dbaa31z-pre.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog%2F1598150468282.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Laputa's Blog"><span class="site-name">Laputa's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Laputa's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/LaputaRobot" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2524777478@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://message/?uin=2524777478&amp;Site=&amp;Menu=yes" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2022/09/25/%E9%94%81/" title="锁"><img class="post-bg" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%284%29.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="锁"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/09/25/%E9%94%81/" title="锁">锁</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-25T12:46:49.152Z" title="发表于 2022-09-25 20:46:49">2022-09-25</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/MySQL%E9%94%81/">MySQL锁</a></span></div><div class="content">事务的隔离性由锁实现
+锁结构当一个事务想对这条记录做改动时，首先会看看内存中有没有与这条记录关联的锁结构，当没有的时候就会在内存中生成一个锁结构与之关联。
 
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
-</body>
-</html>
+锁内存结构InnoDB 存储引擎中的 锁结构 如下：
+
+
+锁所在的事务信息 ： 
+不论是 表锁 还是 行锁 ，都是在事务执行过程中生成的，哪个事务生成了这个 锁结构 ，这里就记录这个 事务的信息。 
+此 锁所在的事务信息 在内存结构中只是一个指针，通过指针可以找到内存中关于该事务的更多信息，比 方说事务id等。
+
+索引信息 ：
+
+
+   对于 行锁 来说，需要记录一下加锁的记录是属于哪个索引的。这里也是一个指针。 
+
+表锁／行锁信息 ： 表锁结构 和 行锁结构 在这个位置的内容是不同的：
+
+
+表锁
+记载着是对哪个表加的锁，还有其他的一些信息。
+
+行锁
+记载了三个重要的信息： 
+Space ID ：记录所在表空间。 
+Page Number ：记录所在页号。 
+n_bits ：对于行锁来说，一条记录就对应着一个比特位，一个页面中包含很多记录，用不同 的比特位来区分到底是哪一条记录加了锁。为此在行锁结构的末尾放置了一堆比特位，这个 n ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/09/09/Queue/" title="Queue"><img class="post-bg" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%284%29.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Queue"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/09/09/Queue/" title="Queue">Queue</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-09T14:54:30.523Z" title="发表于 2022-09-09 22:54:30">2022-09-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java%E9%9B%86%E5%90%88/">Java集合</a></span></div><div class="content">ArrayDequeArrayDeque基于数组实现双端队列，采用head和tail标志队列的头和位，当队列满时，再扩容（两倍）底层的数组的容量；
+add方法addFirst1234567public void addFirst(E e) &#123;    if (e == null)        throw new NullPointerException();    elements[head = (head - 1) &amp; (elements.length - 1)] = e;    if (head == tail)        doubleCapacity();&#125;
+
+addLast1234567public void addLast(E e) &#123;    if (e == null)        throw new NullPointerException();    elements[tail] = e;    if ( (tail = (tail + 1) &amp; (elements.length - 1)) == head)      ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/08/31/%E6%94%B6%E8%97%8F%E6%96%87%E7%AB%A0/" title="收藏文章"><img class="post-bg" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%282%29.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="收藏文章"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/08/31/%E6%94%B6%E8%97%8F%E6%96%87%E7%AB%A0/" title="收藏文章">收藏文章</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-30T17:04:45.253Z" title="发表于 2022-08-31 01:04:45">2022-08-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Spring/">Spring</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Spring/">Spring</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%B3%A8%E8%A7%A3/">注解</a></span></div><div class="content">文章spring注解https://blog.csdn.net/w372426096/category_7126824.html
+循环依赖https://juejin.cn/post/6985337310472568839
+博客基础操作系统https://imageslr.com/
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/05/01/HashMap/" title="HashMap"><img class="post-bg" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%282%29.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HashMap"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/01/HashMap/" title="HashMap">HashMap</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-05-01T13:09:43.073Z" title="发表于 2022-05-01 21:09:43">2022-05-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java%E9%9B%86%E5%90%88/">Java集合</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9B%86%E5%90%88/">集合</a></span></div><div class="content">HashMap介绍基于哈希表的Map接口的实现。这个实现提供了所有可选的map操作，并允许空值和空键。(HashMap类大致相当于Hashtable，只是它是非同步的，并且允许为空。)这个类不保证映射的顺序;特别是，它不能保证顺序将随时间保持不变。
+这个实现为基本操作(get和put)提供了常数时间的性能，假设散列函数将元素适当地分散到存储桶中。迭代集合视图所需的时间与HashMap实例的“容量”(桶的数量)加上它的大小(键值映射的数量)成正比。因此，如果迭代性能很重要，那么初始容量不要设置得太高(或者负载因子太低)是非常重要的。
+HashMap实例有两个参数影响其性能:初始容量和加载因子。容量是哈希表中桶的数量，初始容量就是创建哈希表时的容量。负载因子用于度量在自动增加哈希表的容量之前，允许哈希表达到多大程度。当哈希表中的条目数超过负载因子和当前容量的乘积时，哈希表将被重新哈希(即重新构建内部数据结构)，这样哈希表的桶数大约是原来的两倍。
+一般来说，默认的负载因子(.75)在时间和空间成本之间提供了一个很好的权衡。较高的值会减少空间开销，但会增加查找成本(反映在HashMap类的大多 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/05/01/ArrayList%E5%92%8CLinkedList/" title="ArrayList和LinkedList"><img class="post-bg" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/24d9fd45555503.5834d22eb4b38.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ArrayList和LinkedList"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/01/ArrayList%E5%92%8CLinkedList/" title="ArrayList和LinkedList">ArrayList和LinkedList</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-05-01T08:20:19.341Z" title="发表于 2022-05-01 16:20:19">2022-05-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java%E9%9B%86%E5%90%88/">Java集合</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%9B%86%E5%90%88/">集合</a></span></div><div class="content">ArrayList和LinkedList继承和实现关系collection使用集合层次结构中的根界面 。 集合表示一组被称为其元素的对象。  一些集合允许重复元素，而其他集合不允许。 有些被命令和其他无序。  JDK不提供此接口的任何直接实现：它提供了更具体的子接口的实现，如Set和List  。 该界面通常用于传递集合，并在需要最大的通用性的情况下对其进行操作。
+方法
+
+List使用有序集合(也称为序列)。此界面的用户可以精确控制每个元素在列表中的插入位置。用户可以通过元素的整数索引(在列表中的位置)访问元素，并在列表中搜索元素。与集合不同，列表通常允许重复元素。更正式地说，列表通常允许成对的元素e1和e2，使得e1.equals(E2)，并且它们通常允许多个空元素，如果它们完全允许空元素的话。当用户尝试插入时，有人可能希望通过抛出运行时异常来实现禁止重复的列表，这并不是不可想象的，但我们预计这种用法很少。除了在Collection接口中指定的约定之外，List接口还对迭代器、Add、Remove、Equals和hashCode方法的约定施加了额外的规定。为方便起见，此处还包括了其他 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/04/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/" title="数据库系统原理"><img class="post-bg" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%283%29.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据库系统原理"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/" title="数据库系统原理">数据库系统原理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-09T03:17:07.205Z" title="发表于 2022-04-09 11:17:07">2022-04-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="content">事务的4大特性ACID
+原子性（Atomicity）
+
+事务是不可分割的最小单元，事务的所有操作要么全部提交成功，要么全部失败回滚
+
+一致性（Consistency）
+
+数据库在事务执行前后都保持一致性状态，此时，所有事务对同一数据的读取结果都是相同的。以银行转账事务事务为例。在事务开始之前，所有 账户余额的总额处于一致状态。在事务进行的过程中，一个账户余额减少了，而另一个账户余额尚未修改。因此，所有账户余额的总额处于不一致状态。但是当事务完成以后，账户余额的总额再次恢复到一致状态。
+
+隔离性（Isolation）
+
+一个事务所做的修改在最终提交前，对其他事务是不可见的
+
+持久性（Durability）
+
+一旦事务提交，则其所做的修改将会永远保存到数据库中。即使系统发生崩溃。
+特性间关系
+只有满足一致性，事务的执行结果才是正确的。
+在无并发的情况下，事务串行执行，隔离性一定能够满足。此时只要能满足原子性，就一定能满足一致性。
+在并发的情况下，多个事务并行执行，事务不仅要满足原子性，还需要满足隔离性，才能满足一致性。
+事务满足持久化是为了能应对系统崩溃的情况
+
+
+并发一致性问题并发环境下 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/04/08/Redis%E4%BA%8B%E5%8A%A1/" title="Redis事务"><img class="post-bg" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/fa8dba56613503.59b621f7e3714.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis事务"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/08/Redis%E4%BA%8B%E5%8A%A1/" title="Redis事务">Redis事务</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-08T03:59:11.331Z" title="发表于 2022-04-08 11:59:11">2022-04-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/Redis/">Redis</a></span></div><div class="content">定义Redis事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。Redis事务的主要作用就是串联多个命令防止别的命令插队。
+使用从输入Multi命令开始，输入的命令都会依次进入命令队列中，但不会执行，直到输入Exec后，Redis会将之前的命令队列中的命令依次执行。组队的过程中可以通过discard来放弃组队。
+
+
+
+组队中某个命令出现了报告错误，执行时整个的所有队列都会被取消。
+
+如果执行阶段某个命令报出了错误，则只有报错的命令不会被执行，而其他的命令都会执行，不会回滚。
+
+
+
+事务冲突问题悲观锁
+悲观锁(Pessimistic Lock), 顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。
+乐观锁
+乐观锁(Optimistic Lock), 顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/04/08/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis数据类型"><img class="post-bg" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%283%29.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis数据类型"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/08/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis数据类型">Redis数据类型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-08T03:59:11.315Z" title="发表于 2022-04-08 11:59:11">2022-04-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/Redis/">Redis</a></span></div><div class="content">字符串
+是二进制安全的，意味着可以存放图片或者序列化对象
+
+最多可以存512M
+
+
+命令Redis 操作是原子性的，因为是单线程的
+
+追加 append [key] [value]
+
+获取值长度 strlen 获得值的长度
+
+setnx 只有在 key 不存在时 设置 key 的值
+
+incr 将 key 中储存的数字值增1,只能对数字值操作，如果为空，新增值为1
+
+decr 将 key 中储存的数字值减1,只能对数字值操作，如果为空，新增值为-1
+
+incrby &#x2F; decrby  &lt;步长&gt; 将 key 中储存的数字值增减。自定义步长。
+
+mset  …..同时设置一个或多个 key-value对
+
+mget  ….. 同时获取一个或多个 value 
+
+msetnx  ….. 同时设置一个或多个 key-value 对，当且仅当所有给定 key 都不存在。
+
+原子性，有一个失败则都失败
+
+
+getrange &lt;起始位置&gt;&lt;结束位置&gt;  获得值的范围，类似java中的substring，前包，后包
+
+setrange &lt;起始位置&g ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/04/03/Unsafe/" title="Unsafe"><img class="post-bg" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/24d9fd45555503.5834d22eb4b38.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unsafe"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/03/Unsafe/" title="Unsafe">Unsafe</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-03T12:13:55.931Z" title="发表于 2022-04-03 20:13:55">2022-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E5%B9%B6%E5%8F%91/">java并发</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/java%E5%B9%B6%E5%8F%91/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CAS/">CAS</a></span></div><div class="content">获取与使用123456789101112131415161718192021public class TestUnsafe &#123;    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException &#123;        Field theUnsafe = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);        theUnsafe.setAccessible(true);        Unsafe unsafe = (Unsafe) theUnsafe.get(null);        System.out.println(unsafe);        // 1. 获取域的偏移地址        long idOffset = unsafe.objectFieldOffset(Teacher.class.getDeclaredField(&quot;id&quot;));        ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/04/03/%E5%8E%9F%E5%AD%90%E6%95%B0%E6%8D%AE/" title="原子数据"><img class="post-bg" src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/%E4%B8%8B%E8%BD%BD%20%282%29.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="原子数据"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/03/%E5%8E%9F%E5%AD%90%E6%95%B0%E6%8D%AE/" title="原子数据">原子数据</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-03T11:57:02.804Z" title="发表于 2022-04-03 19:57:02">2022-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java%E5%B9%B6%E5%8F%91/">java并发</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/java%E5%B9%B6%E5%8F%91/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/java/">java</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">java内存模型</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/CAS/">CAS</a></span></div><div class="content">原子整数J.U.C 并发包提供了：
+
+AtomicBoolean
+
+AtomicInteger
+
+AtomicLong
+以 AtomicInteger 为例
+
+
+调用Unsafe的compareAndSwapInt实现
+123456789101112131415161718192021222324252627AtomicInteger i = new AtomicInteger(0);// 获取并自增（i = 0, 结果 i = 1, 返回 0），类似于 i++System.out.println(i.getAndIncrement());// 自增并获取（i = 1, 结果 i = 2, 返回 2），类似于 ++iSystem.out.println(i.incrementAndGet());// 自减并获取（i = 2, 结果 i = 1, 返回 1），类似于 --iSystem.out.println(i.decrementAndGet());// 获取并自减（i = 1, 结果 i = 0, 返回 1），类似于 i--System.out.println(i.getAndDec ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://halo-1306111927.cos.ap-beijing.myqcloud.com/halo-blog/l_a_p_u_t_a_by_blargen69_dbaa31z-pre.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Laputa</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/LaputaRobot" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2524777478@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://message/?uin=2524777478&amp;Site=&amp;Menu=yes" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java%E9%9B%86%E5%90%88/"><span class="card-category-list-name">Java集合</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/MySQL%E9%94%81/"><span class="card-category-list-name">MySQL锁</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Spring/"><span class="card-category-list-name">Spring</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/java%E5%B9%B6%E5%8F%91/"><span class="card-category-list-name">java并发</span><span class="card-category-list-count">6</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/java%E5%B9%B6%E5%8F%91/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="card-category-list-name">设计模式</span><span class="card-category-list-count">5</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="card-category-list-name">数据库</span><span class="card-category-list-count">3</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 1.22em; color: rgb(51, 125, 106)">集合</a><a href="/tags/java/" style="font-size: 1.45em; color: rgb(31, 81, 104)">java</a><a href="/tags/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" style="font-size: 1.38em; color: rgb(17, 106, 46)">java内存模型</a><a href="/tags/CAS/" style="font-size: 1.3em; color: rgb(86, 102, 80)">CAS</a><a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 1.3em; color: rgb(4, 183, 99)">并发</a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.22em; color: rgb(181, 141, 33)">设计模式</a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.22em; color: rgb(125, 172, 65)">数据库</a><a href="/tags/Redis/" style="font-size: 1.22em; color: rgb(28, 114, 173)">Redis</a><a href="/tags/Spring/" style="font-size: 1.15em; color: rgb(186, 121, 108)">Spring</a><a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 1.15em; color: rgb(190, 141, 111)">注解</a><a href="/tags/%E9%94%81/" style="font-size: 1.15em; color: rgb(174, 121, 92)">锁</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">五月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">四月 2022</span><span class="card-archive-list-count">9</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">14</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2021-06-06T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">17.7k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-02-04T16:18:38.511Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Laputa</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to Laputa's Blog <a target="_blank" rel="noopener" href="https://blog.hellook.top/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["🔮充满希望 | 保持敬畏🛸"])
+  } else {
+    document.getElementById("subtitle").innerHTML = '🔮充满希望 | 保持敬畏🛸'
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

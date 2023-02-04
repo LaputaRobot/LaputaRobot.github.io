@@ -207,4 +207,4 @@ class HexoToTypecho():
 if __name__ == '__main__':
     files = [f for f in os.listdir('_posts') if not f.startswith('.')]
     print('总有', files)
-    HexoToTypecho(host='120.46.180.40', user='ygb', database='typecho1', files=files, passwd='hdljd731')
+    HexoToTypecho(host='120.46.180.40', user='ygb', database='rn_typecho', files=files, passwd='hdljd731')
